@@ -1,7 +1,5 @@
 package org.acme.albertosenserrich.provisioncalculator.dto;
 
-import java.math.BigDecimal;
-
 import org.acme.albertosenserrich.provisioncalculator.constants.GeneralConstants;
 import org.acme.albertosenserrich.provisioncalculator.enums.Department;
 import org.acme.albertosenserrich.provisioncalculator.enums.Seniority;
