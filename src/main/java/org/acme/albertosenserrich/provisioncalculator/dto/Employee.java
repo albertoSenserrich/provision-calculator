@@ -1,7 +1,10 @@
 package org.acme.albertosenserrich.provisioncalculator.dto;
 
+import java.math.BigDecimal;
+
 import org.acme.albertosenserrich.provisioncalculator.constants.GeneralConstants;
 import org.acme.albertosenserrich.provisioncalculator.enums.Department;
+import org.acme.albertosenserrich.provisioncalculator.enums.Seniority;
 
 public class Employee {
 
@@ -15,16 +18,12 @@ public class Employee {
 		this.departmentType = Department.OTHER;
 	}
 
-	public double calculateExpensesForEmploye() {
-		double totalProvisionForCompany;
-		if (this.tenure < 3) {
-			totalProvisionForCompany = this.salary * this.departmentType.ratio;
-		} else if (this.tenure < 10) {
-			totalProvisionForCompany = this.salary * 1.2 * this.departmentType.ratio;
-		} else {
-			totalProvisionForCompany = this.salary * 1.5 * this.departmentType.ratio;
-		}
-		return totalProvisionForCompany+ GeneralConstants.DEFAULT_EXPENSE_FOR_EMPLOYE;
+	public long calculateExpensesForEmploye() {
+		long totalProvisionForCompany = salary;
+		Seniority actualSeniority =  Seniority.getSeniorityByYears(this.tenure);
+		//remove floating points from operators
+		totalProvisionForCompany = (((long)(actualSeniority.salaryRatio *10)) * ((long)(this.departmentType.ratio *10)) * totalProvisionForCompany)/100;
+		return totalProvisionForCompany + GeneralConstants.DEFAULT_EXPENSE_FOR_EMPLOYE;
 	}
 
 	public Employee() {

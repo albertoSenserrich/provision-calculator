@@ -1,5 +1,6 @@
 package org.acme.albertosenserrich.provisioncalculator.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,16 +17,16 @@ public class ProvisionCalculator {
      * @param listOfEmployees List with current Employees
      */
     public long calculateProvision(List<Employee> listOfEmployees) {
-        double totalProvisionForCompany = 0; // total to provision
+        long totalProvisionForCompany = 0; // total to provision
         if (listOfEmployees != null) {
         	for(Employee employeeElem : listOfEmployees) {
-        		totalProvisionForCompany+= employeeElem.calculateExpensesForEmploye();
+        		totalProvisionForCompany += employeeElem.calculateExpensesForEmploye();
             }
             System.out.println("Total before other expenses: " + totalProvisionForCompany);
             // this part calculate the fix expenses independently of the type of employee
-            totalProvisionForCompany += GeneralConstants.COST_OF_RENT; 
+            totalProvisionForCompany += GeneralConstants.COST_OF_RENT ; 
         }
-        return (long)totalProvisionForCompany;
+        return totalProvisionForCompany;
     }
 
 /*
